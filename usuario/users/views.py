@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializer import UserSerializerRead, UserSerializerWrite, UserSerializer2
+from .serializer import UserSerializerRead, UserSerializerWrite, UserSerializer3
 from .models import User
 
 
