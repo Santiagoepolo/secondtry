@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import UserSerializerRead, UserSerializerWrite, UserSerializer3
 from .models import User
-
+from rest_framework import status
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 class UserView(APIView):
@@ -32,8 +33,8 @@ class UserView(APIView):
         return Response(serializer.data, status=201)
         
     def put(self,request,pk=None,format=None):
-        serielizer=self.get_serializer_class
-        queryset= User.objects.get(pk=pk)
+        serielizer=self.get_serializer_class(request)
+        queryset= get_object_or_404(User, pk=pk, )
         serielizer=self.get_serializer_class(request)(instance=queryset, data=request.data)
         serielizer.is_valid(raise_exception=True)
         update_user=serielizer.update(queryset,serielizer.validated_data)
@@ -42,5 +43,5 @@ class UserView(APIView):
     def delete(self,request,pk=None,format=None):
             queryset=User.objects.get(pk=pk)
             queryset.soft_delete()
-            return Response(status=200)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         

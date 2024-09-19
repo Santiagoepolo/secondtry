@@ -13,6 +13,7 @@ class User(models.Model):
     last_login=models.DateTimeField(null=True,blank=True)
     update_at=models.DateTimeField(auto_now=True)
     deleted_at=models.DateTimeField(null=True,blank=True)
+
     
 #Este es un método para representar al objeo string cuando lo imprimamos, asi veremos el nombre y no algo como "user1"
     def __str__(self) -> str:
@@ -32,4 +33,8 @@ class User(models.Model):
     def update_last_login(self):
         self.last_login = timezone.now()
         self.save()
+    
+    @property 
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
     

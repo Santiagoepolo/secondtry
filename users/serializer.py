@@ -3,10 +3,9 @@ from .models import User
 
 #En el paréntesis le estoy diciendo que desde serializers voy a crear un Model serializer
 class UserSerializerRead(serializers.Serializer):
+    id=serializers.IntegerField()
     username=serializers.CharField(max_length=20,help_text="El nombre debe ser único")
-    first_name=serializers.CharField(max_length=20)
-    last_name=serializers.CharField(max_length=20)
-
+    full_name=serializers.CharField()
    
 class UserSerializerWrite(serializers.Serializer):
     username=serializers.CharField(max_length=20, help_text="El nombre debe ser único")
